@@ -1,0 +1,51 @@
+#
+#  TEMPLATE CONFIG FILE FOR BUILD: PLEASE REMOVE COMMENTS 
+#  BEFORE USE
+# 
+
+{
+  # Where the project directory is located: can be ommited
+  # and the current directory will be used
+  "project_dir" : "c:\\wkcpp2\\mingw64_template",
+  # Where your source files (*.cpp and *.h) are located. 
+  # Yes, I do not support multiple source directories 
+  # (very convenient for having shared sources among projects)
+  # and for support a separate directory for the header files 
+  "source_dir" : "src", 
+  # The libraries, placed as the options to feed the compiler
+  "libs": [
+    "-lstdc++"
+  ],
+  # List of releases, as objects: for instance here is the 
+  # configuration for a "Debug" release. The build system 
+  # will create a "Debug" folder and will place all the object
+  # files and executables there
+  "releases": [
+    {
+      "name" : "Debug",
+      # options to feed the compiler for this release
+      "compile_options" : [
+        "-Werror",
+        "-Wextra",
+        "-Wall",
+        "-pedantic",
+        "-I$source_dir"        
+      ],
+      # link options for the compiler: additional lib folders 
+      # can go here
+      "link_options": [
+        "-g"
+      ],
+      "executable" : "example.exe"
+    }
+  ],
+  # no support to tests by now 
+  "tests": null, 
+  # the commands that will be run to compile and to 
+  # link every source file/executable. $source_path,
+  # $compile_options and other are variables and will 
+  # be replaces automatically when it's about to run 
+  # the compiler
+  "compile_command" : ["gcc", "$source_path", "$compile_options", "-c", "-o", "$object_path"],
+  "link_command": ["gcc", "$object_files", "$libs", "$link_options", "-o", "$executable" ]
+}
